@@ -35,7 +35,7 @@
 
                 @if (submitted || controlForm['email'].errors) {
                   <div class="mt-2" style="background: rgba(231, 76, 60, 0.2); border: 2px solid rgba(231, 76, 60, 0.5); border-radius: 8px; padding: 8px; color: white; font-size: 0.85rem;">
-                    @if (submitted && controlForm['email'].errors) {
+                    @if (submitted || controlForm['email'].errors) {
                       <div><i class="bi bi-x-circle me-1"></i>Verificar Email</div>
                     }
                   </div>
