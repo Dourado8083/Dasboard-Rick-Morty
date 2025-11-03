@@ -1,0 +1,140 @@
+<div class="container">
+  @if (Loading) {
+  <div class="position-fixed top-0 start-0 end-0 bottom-0 d-flex justify-content-center align-items-center"
+    style="background: rgba(10, 10, 30, 0.95); backdrop-filter: blur(12px); z-index: 1000;">
+    <div class="text-center">
+      <div class="position-relative w-auto h-auto mx-auto mb-4 portal">
+        <div class="spinner-border text-dark" role="status">
+          <span class="visually-hidden">Loading...</span>
+        </div>
+      </div>
+      <p class="loading">Carregando Portais no Planetas...</p>
+    </div>
+  </div>
+  } @else {
+
+  <div class="page-header">
+    <div class="header-content">
+      <h1 class="fs-1 fw-bolder text-white d-flex align-items-center justify-content-center gap-3 m-0 flex-wrap">
+        <span class="fs-1" style="font-size: 3rem; animation: bounce 2s ease-in-out infinite;">🌍</span>
+        <span class="glitch" data-text="LOCALIZAÇÕES">Localização</span>
+      </h1>
+    </div>
+  </div>
+
+  <div class="stats-bar">
+    <div class="card">
+      <div class="stat-icon">🌍</div>
+      <div class="stat-content">
+        <span class="stat-number">{{ locations.length }}</span>
+        <span class="stat-label">Localizações</span>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="stat-icon">📄</div>
+      <div class="stat-content">
+        <span class="stat-number">{{ pageActive }}</span>
+        <span class="stat-label">Página Atual</span>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="stat-icon">📚</div>
+      <div class="stat-content">
+        <span class="stat-number">{{ totalofPage }}</span>
+        <span class="stat-label">Total Páginas</span>
+      </div>
+    </div>
+  </div>
+
+  @if (locations.length > 0) {
+  <div class="container-fluid mb-4">
+    <div class="row g-4">
+      @for (location of locations; track location.id) {
+      <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+        <div class="location-card">
+          <div class="card-header">
+            <div class="location-icon-wrapper">
+              <span class="location-icon">🌍</span>
+            </div>
+            <div class="location-id-badge">#{{ location.id }}</div>
+          </div>
+
+          <div class="card-content">
+            <h3 class="location-name">{{ location.name }}</h3>
+
+            <div class="location-details">
+              <div class="detail-row">
+                <i class="bi bi-compass"></i>
+                <span>{{ location.type }}</span>
+              </div>
+              <div class="detail-row">
+                <i class="bi bi-layers"></i>
+                <span>{{ location.dimension }}</span>
+              </div>
+              <div class="detail-row">
+                <i class="bi bi-people"></i>
+                <span>{{ location.residents.length }} residentes</span>
+              </div>
+            </div>
+
+            <button class="btn-location-details w-100" (click)="locationDetails(location)">
+              <i class="bi bi-eye me-2"></i>
+              Ver Endereço
+            </button>
+          </div>
+        </div>
+      </div>
+      } @empty {
+      <div class="col-12">
+    <div class="alert alert-danger" role="alert">
+  <p>Localização não encontrada</p>
+</div>
+      </div>
+      }
+    </div>
+  </div>
+  }
+  @if (locations.length > 0) {
+  <div class="pagination-wrapper">
+    <div class="pagination-container">
+      <button class="btn-paginations nav-pagination" (click)="previousPage()" [disabled]="pageActive === 1">
+        <i class="bi bi-chevron-compact-left"></i>
+        <span class="btn-text">Anterior</span>
+      </button>
+
+      <div class="pagination-numbers">
+        @if (pageActive > 3) {
+        <button class="btn-paginations pagination-number" (click)="validePage(1)">
+          1
+        </button>
+        }
+
+        @for (page of getPageNumbers(); track page) {
+        <button class="btn-paginations pagination-number" [class.active]="page === pageActive"
+          (click)="validePage(page)">
+          {{ page }}
+        </button>
+        }
+
+        @if (pageActive < totalofPage - 2) { <button class="btn-paginations pagination-number"
+          (click)="validePage(totalofPage)">
+          {{ totalofPage }}
+          </button>
+          }
+      </div>
+
+      <button class="btn-paginations nav-pagination" (click)="nextPage()" [disabled]="pageActive === totalofPage">
+        <span class="btn-text">Próxima</span>
+        <i class="bi bi-chevron-compact-right"></i>
+      </button>
+    </div>
+
+    <div class="text-center text-white opacity-75 fs-6 fw-medium">
+      <p>Página {{ pageActive }} de {{ totalofPage }}</p>
+    </div>
+  </div>
+  }
+  }
+</div>

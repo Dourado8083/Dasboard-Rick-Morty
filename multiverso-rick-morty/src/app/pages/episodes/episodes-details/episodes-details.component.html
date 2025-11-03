@@ -1,0 +1,174 @@
+<div class="bg-screen">
+  @if (Loading) {
+    <div class="loading">
+        <p class="loading-text">Sintonizando frequência</p>
+    </div>
+  } @else if (episode) {
+    <div class="container py-4">
+      <div class="details-header mb-4">
+        <button  class="btn btn-outline-primary round-4" (click)="back()">
+          <i class="bi bi-arrow-left back-icon"></i>
+          <span>Voltar  para o arquivo Arquivo</span>
+        </button>
+        
+        <div class="navigation-controls">
+          <button 
+            class="nav-btn"
+            (click)="previousEpisode()"
+            [disabled]="currentId === 1"
+          >
+            <i class="bi bi-chevron-left"></i>
+            <span class="nav-text">Anterior</span>
+          </button>
+          
+          <div class="episode-counter">
+            <span class="counter-label">Episódio</span>
+            <span class="counter-value">#{{ currentId }}</span>
+          </div>
+          
+          <button 
+            class="nav-btn"
+            (click)="nextEpisode()"
+            [disabled]="currentId === totalEpisodes"
+          >
+            <span class="nav-text">Próximo</span>
+            <i class="bi bi-chevron-right"></i>
+          </button>
+        </div>
+      </div>
+
+      <div class="episode-main-card mb-4">
+        <div class="episode-hero">
+          <div class="hero-icon-wrapper">
+            <div class="hero-icon">📺</div>
+            <div class="pulse-ring"></div>
+          </div>
+          
+          <h1 class="episode-title">{{ episode.name }}</h1>
+          
+          <div class="episode-code-badge">
+            {{ episode.episode }}
+          </div>
+        </div>
+
+        <div class="info-grid">
+          <div class="info-card">
+            <div class="info-icon">
+              <i class="bi bi-calendar-event"></i>
+            </div>
+            <div class="info-content">
+              <span class="info-label">Data de Exibição</span>
+              <span class="info-value">{{ episode.air_date | date:'dd/MM/yyyy' }}</span>
+            </div>
+          </div>
+
+          <div class="info-card">
+            <div class="info-icon">
+            <i class="bi bi-person"></i>
+            </div>
+            <div class="info-content">
+              <span class="info-label">ID</span>
+              <span class="info-value">#{{ episode.id }}</span>
+            </div>
+          </div>
+
+          <div class="info-card">
+            <div class="info-icon">
+              <i class="bi bi-film"></i>
+            </div>
+            <div class="info-content">
+              <span class="info-label">Código</span>
+              <span class="info-value">{{ episode.episode }}</span>
+            </div>
+          </div>
+
+          <div class="info-card">
+            <div class="info-icon">
+              <i class="bi bi-clock-history"></i>
+            </div>
+            <div class="info-content">
+              <span class="info-label">Registrado em</span>
+              <span class="info-value">{{ episode.created | date:'dd/MM/yyyy' }}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="characters-card">
+        <div class="characters-header">
+          <div class="header-icon">
+            <i class="bi bi-people-fill"></i>
+          </div>
+          <div class="header-content">
+            <h3 class="characters-title">Personagens Encontrado</h3>
+            <p class="characters-subtitle">Seres presentes nesta transmissão</p>
+          </div>
+        </div>
+
+        <div class="characters-stats">
+          <div class="stat-box">
+            <div class="stat-icon">👥</div>
+            <div class="stat-info">
+              <span class="stat-number">{{ episode.characters.length }}</span>
+              <span class="stat-label">Total de Personagens</span>
+            </div>
+          </div>
+
+          @if (episode.characters.length > 0) {
+            <div class="characters-alert success">
+              <i class="bi bi-check-circle-fill me-2"></i>
+              <span>{{ episode.characters.length }} personagens nesta dimensão</span>
+            </div>
+          } @else {
+            <div class="characters-alert warning">
+              <i class="bi bi-exclamation-triangle-fill me-2"></i>
+              <span>Nenhum ser detectado nesta transmissão</span>
+            </div>
+          }
+        </div>
+      </div>
+
+      <div class="bottom-navigation">
+        <button 
+          class="nav-btn-large prev"
+          (click)="previousEpisode()"
+          [disabled]="currentId === 1"
+        >
+          <i class="bi bi-chevron-compact-left"></i>
+          <span> Anterior</span>
+        </button>
+
+        <div class="progress-indicator">
+          <span class="progress-text">{{ currentId }} de {{ totalEpisodes }}</span>
+          <div class="progressbar">
+            <div 
+              class="progress-fill" 
+              [style.width.%]="(currentId / totalEpisodes) * 100"
+            ></div>
+          </div>
+        </div>
+
+        <button 
+          class="nav-btn-large next"
+          (click)="nextEpisode()"
+          [disabled]="currentId === totalEpisodes"
+        >
+          <span>Próximo</span>
+          <i class="bi bi-chevron-compact-right"></i>
+        </button>
+      </div>
+    </div>
+  } @else {
+    <div class="error">
+      <div class="content-error">
+        <div class="fs-1 mb-3">📡</div>
+        <h2>Transmissão não Existe!</h2>
+        <p>Episódio não Existe!</p>
+        <button  (click)="back()">
+          <i class="bi bi-arrow-left-short me-2"></i>
+          Voltar ao Arquivo
+        </button>
+      </div>
+    </div>
+  }
+</div>

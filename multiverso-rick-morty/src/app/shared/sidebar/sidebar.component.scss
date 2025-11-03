@@ -1,0 +1,44 @@
+.sidebar {
+  width: 250px;
+  height: 100vh;
+  position: fixed;
+  left: 0;
+  top: 0;
+  background: linear-gradient(135deg, #1a1a2e, #16213e);
+  box-shadow: 4px 0 20px rgba(0, 255, 136, 0.2);
+  overflow-y: auto;
+  z-index: 1000;
+}
+
+.sidebar-card{
+  background: rgba(0, 255, 136, 0.05);
+  transition: all 0.3s ease;
+  cursor: pointer;
+
+  &:hover {
+    background: rgba(0, 255, 136, 0.2);
+    transform: translateX(5px);
+  }
+}
+
+.link {
+
+    border: 1px solid rgba(0, 0, 0, 0.125);
+    border-radius: 0.5rem;
+    
+
+    display: flex;
+    align-items: center;
+    gap: 0.5rem; 
+
+    color: #fff; 
+    text-decoration: none; 
+
+
+    padding: 0.5rem 1rem;
+}
+.link-actives {
+  background: linear-gradient(45deg, #00ff88, #00d4ff) !important;
+  color: #1a1a2e !important;
+  font-weight: bold;
+}

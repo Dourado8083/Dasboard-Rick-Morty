@@ -1,0 +1,109 @@
+<div class="bg">
+  <div class="container">
+    <div class="row justify-content-center align-items-center min-vh-100">
+      <div class="col-md-5 col-lg-4">
+        
+        <div class="text-center mb-4">
+          <h1 class="title justify-content-center mb-2">
+            <span class="glitch">Multiverso</span>
+          </h1>
+        </div>
+
+        <div class="card-person">
+          <div class="content">
+
+            @if (messageError) {
+              <div class="alert alert-danger border-0 error" role="alert">
+                {{ messageError }}
+              </div>
+            }
+
+            <form [formGroup]="forms" (ngSubmit)="submit()">
+              
+              <div class="mb-3">
+                <label for="email" class="label">
+                  <i class="bi bi-envelope me-2 password" ></i>Email
+                </label><br>
+                <input 
+                  type="email" 
+                  class="emails" 
+                  id="email" 
+                  formControlName="email"
+                  [class.is-invalid]="submitted && controlForm['email'].errors"
+                  placeholder="seu@email.com"
+                />
+
+                @if (submitted || controlForm['email'].errors) {
+                  <div class="mt-2" style="background: rgba(231, 76, 60, 0.2); border: 2px solid rgba(231, 76, 60, 0.5); border-radius: 8px; padding: 8px; color: white; font-size: 0.85rem;">
+                    @if (submitted && controlForm['email'].errors) {
+                      <div><i class="bi bi-x-circle me-1"></i>Verificar Email</div>
+                    }
+                  </div>
+                }
+              </div>
+
+              <div class="mb-3">
+                <label for="password" class="label">
+                  <i class="bi bi-lock me-2 password"  ></i>Senha
+                </label>
+                <div class="input-group">
+                  <input 
+                    [type]="showPassword ? 'text' : 'password'" 
+                    class="emails" 
+                    id="password" 
+                    formControlName="password"
+                    [class.is-invalid]="submitted && controlForm['password'].errors"
+                    placeholder="Senha"
+
+                  />
+                  <button 
+                    class="btn" 
+                    type="button" 
+                    (click)="togglePassword()"
+                  
+                  >
+                    <i class="bi" [class.bi-eye]="!showPassword" [class.bi-eye-slash]="showPassword"></i>
+                  </button>
+                </div>
+
+                @if (submitted && controlForm['password'].errors) {
+                  <div class="mt-2 validPassword" >
+                    @if (controlForm['password'].errors['required']  || controlForm['password'].errors['minlength']) {
+                      <div><i class="bi bi-x-circle me-1"></i>Verificar Senha</div>
+                    }
+                  </div>
+                }
+              </div>
+
+              <div class="mb-4 form-check d-flex justify-content-between align-items-center">
+                <div>
+                  <input 
+                    class="remember-input remember" 
+                    type="checkbox" 
+                    id="remember" 
+                    formControlName="remember"
+                  />
+                  <label class="form-check-label text-white-50" for="remember">
+                    Lembrar-me
+                  </label>
+                </div>
+              </div>
+              
+              <button type="submit" class="btn-portal-details w-100 mb-3">
+                <i class="bi bi-box-arrow-in-right me-2"></i>
+                Entrar
+              </button>
+
+              <div class="text-center">
+                <a [routerLink]="['/register']" class="link">
+                  <br><i class="bi bi-person-plus me-1"></i>Cadastrar Conta
+                </a>
+              </div>
+            </form>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>

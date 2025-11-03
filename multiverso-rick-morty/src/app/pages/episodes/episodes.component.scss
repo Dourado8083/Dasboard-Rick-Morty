@@ -1,0 +1,209 @@
+.bg {
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  position: relative;
+  overflow-x: hidden;
+
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: 
+      radial-gradient(circle at 20% 50%, rgba(255, 255, 255, 0.05), transparent 50%),
+      radial-gradient(circle at 80% 80%, rgba(255, 255, 255, 0.05), transparent 50%);
+    pointer-events: none;
+    animation: float 20s ease-in-out infinite;
+  }
+}
+.loading-header{
+  position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(33, 37, 41, 0.75);
+    display: flex;
+    justify-content:center;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-20px); }
+}
+
+// Loading
+.spinner-portal {
+  position: relative;
+  width: 120px;
+  height: 120px;
+  margin: 0 auto;
+}
+
+
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.loading-text {
+  animation: pulse-text 1.5s ease-in-out infinite;
+}
+
+@keyframes pulse-text {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.6; }
+}
+
+// Header
+.page-header {
+  background: rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(10px);
+  border: 2px solid rgba(0, 255, 136, 0.3);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+}
+
+.portal-title {
+  font-weight: 900;
+  color: white;
+  font-size: 2.5rem;
+}
+
+.icons {
+  font-size: 3rem;
+  animation: bounce 2s ease-in-out infinite;
+}
+
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+.glitch {
+  text-shadow: 0 0 10px rgba(0, 255, 136, 0.8);
+}
+
+// Stats
+.stat-card {
+  background: rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(10px);
+  border: 2px solid rgba(0, 255, 136, 0.3);
+  transition: all 0.3s;
+
+  &:hover {
+    background: rgba(0, 255, 136, 0.1);
+    border-color: #00ff88;
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(0, 255, 136, 0.3);
+  }
+}
+
+.stat-icon {
+  font-size: 2.5rem;
+}
+
+.stat-number {
+  font-size: 2rem;
+  font-weight: 800;
+  color: #00ff88;
+  text-shadow: 0 0 10px rgba(0, 255, 136, 0.3);
+}
+
+.stat-label {
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.7);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  font-weight: 600;
+}
+
+// Episode Card
+.episode-card {
+  background: linear-gradient(135deg, #1a1a2e, #16213e);
+  border: 2px solid rgba(0, 255, 136, 0.3);
+  transition: all 0.3s;
+
+  &:hover {
+    transform: translateY(-10px);
+    border-color: #00ff88;
+    box-shadow: 0 15px 40px rgba(0, 255, 136, 0.4);
+  }
+}
+
+.episode-header {
+  background: rgba(0, 255, 136, 0.1);
+  border-bottom: 2px solid rgba(0, 255, 136, 0.3);
+}
+
+.episode-icon-wrapper {
+  width: 60px;
+  height: 60px;
+  background: linear-gradient(45deg, #00ff88, #00d4ff);
+  box-shadow: 0 4px 15px rgba(0, 255, 136, 0.4);
+}
+
+.episode-code {
+  background: rgba(0, 255, 136, 0.2);
+  border: 2px solid #00ff88 !important;
+  color: #00ff88 !important;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+.episode-title {
+  color: #00ff88;
+  text-shadow: 0 0 5px rgba(0, 255, 136, 0.3);
+  min-height: 2.4em;
+  line-height: 1.2;
+}
+
+.btn-episode {
+  background: linear-gradient(45deg, #00ff88, #00d4ff);
+  border: none;
+  color: #1a1a2e;
+  transition: all 0.3s;
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 255, 136, 0.5);
+  }
+}
+
+// Pagination
+.pagination-wrapper {
+  background: rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(10px);
+  border: 2px solid rgba(0, 255, 136, 0.3);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+}
+
+.pagination {
+  background: rgba(0, 255, 136, 0.1);
+  border: 2px solid rgba(0, 255, 136, 0.3);
+  color: white;
+  font-weight: 600;
+  transition: all 0.3s;
+  min-width: 45px;
+
+  &:hover:not(:disabled):not(.active) {
+    background: rgba(0, 255, 136, 0.2);
+    border-color: #00ff88;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(0, 255, 136, 0.3);
+  }
+
+  &.active {
+    background: linear-gradient(45deg, #00ff88, #00d4ff);
+    color: #1a1a2e;
+    border-color: #00ff88;
+    box-shadow: 0 4px 15px rgba(0, 255, 136, 0.5);
+  }
+
+  &:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+  }
+}
+
+@media (max-width: 768px) {
+  .portal-title { font-size: 1.8rem; }
+  .icons { font-size: 2.5rem; }
+}

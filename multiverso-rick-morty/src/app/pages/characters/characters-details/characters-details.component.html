@@ -1,0 +1,143 @@
+<div class="bg">
+  @if (Loading) {
+<div class="spinner-border text-dark" role="status">
+          <span class="visually-hidden">Loading...</span>
+        </div>
+  } @else if (character) {
+
+    <div class="container py-4">
+      <div class="details-header mb-4">
+        <button class="btn-back" (click)="goBack()">
+          <i class="bi bi-arrow-left back-icon"></i>
+          <span>Voltar ao Portal</span>
+        </button>
+        <h1 class="titles">
+          <span class="title-icon">🔬</span>
+          Dossiê do Personagem
+        </h1>
+      </div>
+
+
+      <div class="card-person mb-4">
+        <div class="card-hero">
+          <div class="image-people">
+            <img 
+              [src]="character.image" 
+              [alt]="character.name" 
+              class="img-person"
+            />
+            <div class="hero-overlay">
+              <span class="id">ID: #{{ character.id }}</span>
+            </div>
+          </div>
+
+          <div class="hero-info">
+            <h2 class="character-title">{{ character.name }}</h2>
+            
+            <div 
+              class="status-badge"
+              [attr.data-status]="character.status.toLowerCase()"
+            >
+              <span class="status"></span>
+              {{ character.status }}
+            </div>
+
+            <div class="main-badges">
+              <div class="badge">
+                <i class="bi bi-stars badge-icon"></i>
+                <div class="badge-info">
+                  <span class="badge-label">Espécie</span>
+                  <span class="badge-value">{{ character.species }}</span>
+                </div>
+              </div>
+
+              <div class="badge">
+                <i class="bi bi-gender-ambiguous badge-icon"></i>
+                <div class="badge-info">
+                  <span class="badge-label">Gênero</span>
+                  <span class="badge-value">{{ character.gender }}</span>
+                </div>
+              </div>
+
+              @if (character.type) {
+                <div class="badge">
+                  <i class="bi bi-tag badge-icon"></i>
+                  <div class="badge-info">
+                    <span class="badge-label">Tipo</span>
+                    <span class="badge-value">{{ character.type }}</span>
+                  </div>
+                </div>
+              }
+            </div>
+          </div>
+        </div>
+
+
+        <div class="information">
+          <div class="section">
+            <div class="section-header">
+              <i class="bi bi-geo-alt section-icon"></i>
+              <h3 class="section-title">Origem</h3>
+            </div>
+            <div class="section-content">
+              <p class="section-value">{{ character.origin?.name }}</p>
+            </div>
+          </div>
+
+
+          <div class="section">
+            <div class="section-header">
+              <i class="bi bi-pin-map section-icon"></i>
+              <h3 class="section-title">Localização Atual</h3>
+            </div>
+            <div class="section-content">
+              <p class="section-value">{{ character.location?.name }}</p>
+            </div>
+          </div>
+
+          <div class="section">
+            <div class="section-header">
+              <i class="bi bi-tv section-icon"></i>
+              <h3 class="section-title">Episódios</h3>
+            </div>
+            <div class="section-content">
+              <p class="section-value">{{ character.episode?.length }}</p>
+              <p class="section-meta">Aparições registradas</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      @if (character.episode && character.episode.length > 0) {
+        <div class="episodes-card">
+          <div class="episodes-header">
+            <h3 class="episodes-title">
+              <i class="bi bi-collection-play"></i>
+              Aparições no Multiverso
+            </h3>
+          </div>
+          <div class="episodes-list">
+            @for (episode of character.episode; track $index) {
+              <div class="episode-item">
+                <span class="episode-badge">EP {{ $index + 1 }}</span>
+                <span class="episode-name">{{ episode }}</span>
+              </div>
+            }
+          </div>
+        </div>
+      }
+    </div>
+  } @else {
+    <div class="error-state">
+      <div class="error-content">
+        <div class="error-icon">⚠️</div>
+        <h2>Personagem não encontrado</h2>
+        <p>Este ser não existe nesta dimensão.</p>
+        <button class="btn-back-error" (click)="goBack()">
+          <i class="bi bi-arrow-left me-2"></i>
+          Voltar ao Portal
+        </button>
+      </div>
+    </div>
+  }
+</div>

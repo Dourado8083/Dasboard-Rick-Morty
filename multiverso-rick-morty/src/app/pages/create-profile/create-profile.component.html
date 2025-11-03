@@ -1,0 +1,126 @@
+<div class="bg">
+  <div class="container">
+    <div class="row justify-content-center align-items-center min-vh-100">
+      <div class="col-md-6 col-lg-5">
+
+        <div class="text-center mb-4">
+          <h1 class="title justify-content-center mb-2">
+            <span class="glitch">Criar Conta</span>
+          </h1>
+        </div>
+
+        <div class="card">
+          <div class="content">
+
+            @if (errorMessage) {
+            <div class="alert alert-danger border-0 mb-3" role="alert"
+              style="background: rgba(231, 76, 60, 0.2); border: 2px solid rgba(231, 76, 60, 0.5) !important; border-radius: 12px;">
+              <i class="bi bi-exclamation-triangle-fill me-2"></i>
+              {{ errorMessage }}
+            </div>
+            }
+
+            @if (successMessage) {
+            <div class="alert alert-success border-0 mb-3" role="alert"
+              style="background: rgba(39, 174, 96, 0.2); border: 2px solid rgba(39, 174, 96, 0.5) !important; border-radius: 12px; color: #27ae60;">
+              <i class="bi bi-check-circle-fill me-2"></i>
+              {{ successMessage }}
+            </div>
+            }
+
+            <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+
+              <div class="mb-3">
+                <label for="name" class="form-label text-white fw-semibold">
+                  <i class="bi bi-person me-2" style="color: #00ff88;"></i>Nome completo
+                </label><br>
+                <input type="text" class="forms" id="name" formControlName="name"
+                  [class.is-invalid]="FieldInvalid('name')" placeholder="Seu nome"
+                  style="background: rgba(255, 255, 255, 0.1); border: 2px solid rgba(0, 255, 136, 0.3); border-radius: 12px; color: white; padding: 12px;" />
+
+                @if (FieldInvalid('name')) {
+                <div class="mt-2"
+                  style="background: rgba(231, 76, 60, 0.2); border: 2px solid rgba(231, 76, 60, 0.5); border-radius: 8px; padding: 8px; color: white; font-size: 0.85rem;">
+                  @if (hasError('name', 'required') || hasError('name', 'minlength')) {
+
+                  <div class="alert alert-danger" role="alert">
+                 Verificar Nome.
+                  </div>
+                  }
+            
+                </div>
+                }
+              </div>
+
+              <div class="mb-3">
+                <label for="email" class="form-label text-white fw-semibold">
+                  <i class="bi bi-envelope me-2" style="color: #00ff88;"></i>Email
+                </label><br>
+                <input type="email" class="forms validPassword" id="email" formControlName="email"
+                  [class.is-invalid]="FieldInvalid('email')" placeholder="seu@email.com"
+                />
+
+                @if (FieldInvalid('email')) {
+                <div class="mt-2 errorEmail"
+                  >
+                  @if (hasError('email', 'required') || hasError('email', 'email')) {
+
+
+                  <div class="alert alert-danger" role="alert">
+                    Verificar Email.
+                  </div>
+
+
+                  }
+               
+                </div>
+                }
+              </div>
+
+              <div class="mb-3">
+                <label for="password" class="form-label text-white fw-semibold">
+                  <i class="bi bi-lock me-2" style="color: #00ff88;"></i>Senha
+                </label>
+                <div class="input-group">
+                  <input [type]="showPassword ? 'text' : 'password'" class="forms" id="password"
+                    formControlName="password" [class.is-invalid]="FieldInvalid('password')"
+                    style="background: rgba(255, 255, 255, 0.1); border: 2px solid rgba(0, 255, 136, 0.3); border-radius: 12px 0 0 12px; color: white; padding: 12px;" />
+                  <button class="btn showPassword" type="button" (click)="togglePassword()"
+                  >
+                    <i class="bi" [class.bi-eye]="!showPassword" [class.bi-eye-slash]="showPassword"></i>
+                  </button>
+                </div>
+
+                @if (FieldInvalid('password')) {
+                <div class="mt-2 validPassword"
+                >
+                  @if (hasError('password', 'required') || hasError('password', 'minlength')) {
+                  <div class="alert alert-danger" role="alert">
+                    Verificar Senha.
+                  </div>
+
+                  }
+                
+                </div>
+                }
+              </div>
+
+              <button type="submit" class="registers w-100 mb-3">
+                <i class="bi bi-rocket-takeoff me-2"></i>
+                Cadastrar
+              </button>
+
+              <div class="text-center">
+                <span class="text-white-50 small">Já tem uma conta? </span>
+                <a [routerLink]="['/login']" class="text-decoration-none small fw-bold" style="color: #00ff88;">
+                  <i class="bi bi-box-arrow-in-right me-1"></i>Faça login
+                </a>
+              </div>
+            </form>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>

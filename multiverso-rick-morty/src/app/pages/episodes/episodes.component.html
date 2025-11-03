@@ -1,0 +1,132 @@
+<div class="bg">
+  @if (Loading) {
+  <div
+    class="loading-header">
+    <div class="text-center">
+      <div class="spinner-portal mb-4">
+        <div class="spinner-border text-dark" role="status">
+          <span class="visually-hidden">Loading...</span>
+        </div>
+      </div>
+      <p class="text-white fs-5 fw-semibold loading-text">Carregando...</p>
+    </div>
+  </div>
+  } @else {
+  <div class="container-fluid px-4 py-4">
+    <div class="page-header mb-4 p-4 rounded-4">
+      <h1 class="portal-title d-flex align-items-center gap-3 mb-0">
+        <span class="icons">📺</span>
+        <span class="glitch">Episódios Interdimensional</span>
+      </h1>
+    </div>
+
+    <div class="row g-3 mb-4">
+      <div class="col-md-4">
+        <div class="stat-card d-flex align-items-center gap-3 p-3 rounded-3">
+          <div class="stat-icon">📺</div>
+          <div>
+            <div class="stat-number">{{ episodes.length }}</div>
+            <div class="stat-label">Episódios</div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="stat-card d-flex align-items-center gap-3 p-3 rounded-3">
+          <div class="stat-icon">📄</div>
+          <div>
+            <div class="stat-number">{{ pageActive }}</div>
+            <div class="stat-label">Atual</div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="stat-card d-flex align-items-center gap-3 p-3 rounded-3">
+          <div class="stat-icon">📚</div>
+          <div>
+            <div class="stat-number">{{ totalofPage }}</div>
+            <div class="stat-label">Total de Páginas</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    @if (episodes.length > 0) {
+    <div class="row g-4 mb-4">
+      @for (episode of episodes; track episode.id) {
+      <div class="col-12 col-sm-6 col-md-4 col-xl-3">
+        <div class="episode-card h-100 rounded-4 overflow-hidden">
+          <div class="episode-header d-flex justify-content-between align-items-center p-3">
+            <div class="episode-icon-wrapper rounded-circle d-flex align-items-center justify-content-center">
+              <span class="fs-2">📺</span>
+            </div>
+            <span class="episode-code badge rounded-pill px-3 py-2">{{ episode.episode }}</span>
+          </div>
+
+          <div class="episode-content p-3 d-flex flex-column gap-3">
+            <h3 class="episode-title fs-5 fw-bold mb-0">{{ episode.name }}</h3>
+
+            <div class="d-flex flex-column gap-2">
+              <div class="d-flex align-items-center gap-2 text-white-50">
+                <i class="bi bi-calendar3 text-success"></i>
+                <span class="small">{{ episode.air_date | date:'dd/MM/yyyy' }}</span>
+              </div>
+              <div class="d-flex align-items-center gap-2 text-white-50">
+                <i class="bi bi-people text-success"></i>
+                <span class="small">{{ episode.characters.length }} personagens</span>
+              </div>
+            </div>
+
+            <button class="btn btn-episode w-100 rounded-3 fw-bold mt-auto" (click)="episodesDetails(episode)">
+              <i class="bi bi-eye-fill"></i>
+              Ver Arquivo
+            </button>
+          </div>
+        </div>
+      </div>
+      }
+    </div>
+    }
+
+
+    @if (episodes.length > 0) {
+    <div class="pagination-wrapper p-4 rounded-4">
+      <div class="d-flex justify-content-center align-items-center gap-2 flex-wrap mb-3">
+        <button class="btn pagination d-flex align-items-center gap-2" (click)="previousPage()"
+          [disabled]="pageActive === 1">
+          <i class="bi bi-chevron-left"></i>
+          <span class="d-none d-md-inline">Anterior</span>
+        </button>
+
+        <div class="d-flex gap-2 align-items-center">
+          @if (pageActive > 3) {
+          <button class="btn pagination" (click)="goToPage(1)">1</button>
+
+          }
+
+          @for (page of getPageNumbers(); track page) {
+          <button class="btn pagination-btn" [class.active]="page === pageActive" (click)="goToPage(page)">
+            {{ page }}
+          </button>
+          }
+
+          @if (pageActive < totalofPage - 2) { <button class="btn pagination" (click)="goToPage(totalofPage)">
+            {{ totalofPage }}
+            </button>
+            }
+        </div>
+
+        <button class="btn paginationd-flex align-items-center gap-2" (click)="nextPage()"
+          [disabled]="pageActive === totalofPage">
+          <span class="d-none d-md-inline">Próxima</span>
+          <i class="bi bi-chevron-right"></i>
+        </button>
+      </div>
+
+      <p class="text-center text-black-50 ">
+        Página {{ pageActive }} de {{ totalofPage }}
+      </p>
+    </div>
+    }
+  </div>
+  }
+</div>

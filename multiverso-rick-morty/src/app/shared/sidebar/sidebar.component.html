@@ -1,0 +1,38 @@
+<div class="sidebar  d-flex flex-column p-3">
+
+  <div class="portal-ring mx-auto mt-3"></div>
+  
+  <h3 class="text-center text-white  mt-3 mb-0">Bem Vindo(a) {{name}}</h3>
+  <hr class="portal-divider border-success opacity-25 my-3" />
+
+  <nav class="nav flex-column gap-3">
+    <a [routerLink]="['/characters']" 
+       routerLinkActive="link-actives" 
+       class="sidebar-cardlink">
+      <span>Personagens</span>
+    </a>
+
+    <a [routerLink]="['/episodes']" 
+       routerLinkActive="link-actives" 
+       class="sidebar-cardlink">
+      <span>Episódios</span>
+    </a>
+
+    <a [routerLink]="['/locations']" 
+       routerLinkActive="link-actives" 
+       class="sidebar-cardlink">
+      <span>Localidade</span>
+    </a>
+
+    <a [routerLink]="['/my-profile']" 
+       routerLinkActive="link-actives" 
+       class="sidebar-cardlink">
+      <span>Meu Perfil</span>
+    </a>
+
+    <a (click)="logout()" 
+       class="sidebar-cardlink">
+      <span>Sair</span>
+    </a>
+  </nav>
+</div>
