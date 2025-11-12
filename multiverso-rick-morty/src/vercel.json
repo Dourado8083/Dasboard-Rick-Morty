@@ -5,7 +5,7 @@
       "src": "package.json",
       "use": "@vercel/static-build",
       "config": {
-        "distDir": "dist/multiverso-rick-morty/browser"
+        "distDir": "dist/browser"
       }
     }
   ],
@@ -15,7 +15,7 @@
     },
     {
       "src": "/(.*)",
-      "dest": "/dist/multiverso-rick-morty/browser/index.html"
+      "dest": "/dist/browser/index.html"
     }
   ]
 }
